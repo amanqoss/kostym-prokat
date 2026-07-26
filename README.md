@@ -4,12 +4,17 @@
 
 A full-stack rental platform for children's costumes in Atyrau, Kazakhstan, built for parents of kindergarten and primary school kids. Customers browse a bilingual (Russian/Kazakh) catalog filtered by occasion (Nauryz, New Year, Autumn Ball, Victory Day) or costume type, check real-time date availability, and book directly through WhatsApp — no accounts or online payment required. Includes a password-protected admin panel for managing inventory, bookings, and customer review moderation, with no user registration system needed.
 
-## Technologies
-- **Next.js (React)** — website + admin panel in one project, a modern and standard choice, it's easy to work with it together in a chat
-- **SQLite + Prisma** — a real database for suits, armor, and statuses (lightweight, does not require a separate database server, ideal for starting at 50-200 positions)
-- **Tailwind CSS** — quick stylization, mobile-first
-- **Booking-flow:** the client selects the dates → the form → the reservation is saved in the database with the status "New" → WhatsApp opens at the same time with a ready message to the manager
-- **Admin-panel:** closed page /admin (by password) — adding costumes, changing the status of "free/busy/dry cleaning", viewing armor
+## Tech Stack
+
+### Frontend & Backend
+
+- Framework: Next.js 16 (App Router, Server Components, Server Actions)
+- Language: TypeScript
+- Styling: Tailwind CSS v4
+- Database ORM: Drizzle ORM
+- Database: SQLite 
+- API: Next.js Route Handlers (/api/bookings, /api/reviews) + Server Actions
+- i18n: Custom RU/KZ dictionary (language switch, server-rendered)
 
 ## How to run locally
 
