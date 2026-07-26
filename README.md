@@ -1,115 +1,59 @@
-# ПрокатКостюм.kz — сайт проката детских костюмов (Prokat_kids)
+# ПрокатКостюм.kz — children's costume rental website (Prokat_kids)
 
-## Что внутри
-- **Next.js** (React + TypeScript) — сайт, API и админка в одном проекте
-- **SQLite + Drizzle ORM** — база данных (костюмы, брони, отзывы, категории)
-- **Tailwind CSS** — стили
-- Двуязычный интерфейс RU / KZ (переключатель в шапке сайта)
-- Каталог с фильтрами (повод / тип / возраст)
-- Бронирование с проверкой занятых дат + автооткрытие WhatsApp с готовым сообщением
-- Блок отзывов с фото на главной + страница отзывов с формой (модерация обязательна)
-- Админ-панель (`/admin`) — управление костюмами, бронями, модерация отзывов
+## The brief description
 
-## Как запустить локально
+A full-stack rental platform for children's costumes in Atyrau, Kazakhstan, built for parents of kindergarten and primary school kids. Customers browse a bilingual (Russian/Kazakh) catalog filtered by occasion (Nauryz, New Year, Autumn Ball, Victory Day) or costume type, check real-time date availability, and book directly through WhatsApp — no accounts or online payment required. Includes a password-protected admin panel for managing inventory, bookings, and customer review moderation, with no user registration system needed.
 
-1. Установите зависимости:
+## What's inside
+- **Next.js** (React + TypeScript) — website, API and admin panel in one project
+- **SQLite + Drizzle ORM** — database (suits, armor, reviews, categories)
+- **Tailwind CSS** — styles
+- Bilingual RU/ KZ interface (switch in the header of the site)
+- Catalog with filters (occasion/ type/ age)
+- Booking with check of busy dates + automatic opening of WhatsApp with a ready message
+- A block of reviews with photos on the main page + a feedback page with a form (moderation is required)
+- Admin panel (`/admin`) — management of costumes, armor, moderation of reviews
+
+## How to run locally
+
+1. Installation:
    ```bash
    npm install
    ```
 
-2. Создайте базу данных и таблицы:
+2. Create a database and tables:
    ```bash
    npx drizzle-kit push
    ```
 
-3. Наполните базу тестовыми данными:
+3. Fill the database with test data:
    ```bash
-   npx tsx src/db/seed.ts          # 12 костюмов из ассортимента
-   npx tsx src/db/seed-reviews.ts  # 3 демо-отзыва
+   npx tsx src/db/seed.ts          
+   npx tsx src/db/seed-reviews.ts  
    ```
 
-4. Запустите сайт:
+4. Run it:
    ```bash
    npm run dev
    ```
    Откройте http://localhost:3000
 
-## Админ-панель
 
-Откройте **http://localhost:3000/admin** — попадёте на страницу входа.
 
-**Пароль по умолчанию:** `prokatkids2026`
-
-⚠️ **Обязательно смените пароль перед реальным запуском** — создайте файл `.env.local`
-в корне проекта и добавьте туда свой пароль:
-```
-ADMIN_PASSWORD=ваш-новый-пароль
-```
-
-Что можно делать в админке:
-- **Костюмы** — добавлять новые (с фото, ценой, привязкой к праздникам), менять статус
-  (в обороте / в химчистке / в ремонте / списан), удалять
-- **Брони** — видеть все заявки с сайта, менять статус (новая → подтверждена → завершена)
-- **Отзывы** — одобрять или отклонять отзывы, присланные через форму на сайте
-  (по умолчанию новый отзыв НЕ виден на сайте, пока вы его не одобрите)
-
-Регистрации/личных кабинетов для клиентов нет и не нужно — бронирование сразу
-уходит в WhatsApp, как и договаривались.
-
-## Перед реальным запуском (важно!)
-
-1. **Пароль админки** — см. выше, обязательно смените.
-
-2. **Номер WhatsApp и данные компании** — уже подставлены реальные (Prokat_kids,
-   проспект Султана Бейбарыса 532а, +7 778 172 04 18). Если что-то изменится —
-   правьте в `src/lib/config.ts`.
-
-3. **Шрифты** — сейчас используется системный шрифт, т.к. песочница, где собирался
-   проект, не имеет доступа к Google Fonts. На реальном хостинге (Vercel и т.п.)
-   верните красивые шрифты — откройте `src/app/layout.tsx` и `src/app/globals.css`
-   и восстановите:
-   ```ts
-   import { Unbounded, Manrope } from "next/font/google";
-   const unbounded = Unbounded({ variable: "--font-unbounded", subsets: ["latin","cyrillic"], weight: ["500","600","700"] });
-   const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin","cyrillic"] });
-   ```
-   (в globals.css вернуть `--font-display: var(--font-unbounded); --font-sans: var(--font-manrope);`)
-
-4. **Загрузка фото (важно для деплоя!)** — фото костюмов и отзывов сейчас
-   сохраняются прямо на диск сервера (`public/uploads/...`). Это отлично работает
-   на обычном сервере/VPS, но **не будет работать на serverless-хостинге типа
-   Vercel** (там файловая система временная и очищается). Если будете
-   деплоить на Vercel — на этом этапе понадобится подключить внешнее хранилище
-   (например, Vercel Blob, Cloudinary или Amazon S3) вместо прямой записи на диск.
-   Дайте знать, когда дойдём до деплоя — поможем это настроить.
-
-## Структура проекта
+## The structure of project
 ```
 src/
   app/
-    page.tsx          — главная (hero, праздники, отзывы, блок доверия)
-    catalog/           — каталог с фильтрами
-    costume/[slug]/    — карточка костюма + бронирование
-    reviews/           — страница отзывов + форма
-    admin/             — админ-панель (логин, костюмы, брони, отзывы)
-    api/bookings/       — API бронирования
-    api/reviews/        — API отзывов (с загрузкой фото)
-  components/         — шапка, футер, карточки, формы
-  db/                 — схема БД, запросы, скрипты наполнения тестовыми данными
-  lib/                — переводы (i18n), конфигурация компании, авторизация админки
-  proxy.ts            — защита /admin (бывший middleware.ts)
+    page.tsx          — main page (hero, holidays, reviews, trust block)
+    catalog/           — catalog with filters
+    costume/[slug]/    — costume card + booking
+    reviews/           — feedback page + form
+    admin/             — admin panel (login, costumes, armor, reviews)
+    api/bookings/       — API booking
+    api/reviews/        — API reviews (with photo upload)
+  components/         — header, footer, cards, forms
+  db/                 — database schema, queries, scripts for filling with test data
+  lib/                — transfers (i18n), company configuration, admin panel authorization
+  proxy.ts            — protection /admin (former middleware.ts)
 ```
 
-## Что уже готово
-- Главная страница с сезонными разделами и блоком отзывов
-- Каталог с фильтрами, 12 тестовых костюмов
-- Бронирование с проверкой пересечения дат + WhatsApp
-- Двуязычность RU/KZ
-- Футер с реальными контактами и ссылкой на 2ГИС
-- Отзывы с фото + модерация
-- Админ-панель без регистрации, по паролю
-
-## Что впереди (следующие шаги)
-- Реальные фотографии костюмов (сейчас — эмодзи-заглушки)
-- Настройка внешнего хранилища фото под деплой (если хостинг serverless)
-- Деплой на хостинг (Vercel рекомендуется для старта)
