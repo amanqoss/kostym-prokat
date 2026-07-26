@@ -1,0 +1,7 @@
+node_modules/
+.next/
+sqlite.db
+sqlite.db-shm
+sqlite.db-wal
+.env
+.env.local
