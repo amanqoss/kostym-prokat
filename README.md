@@ -38,7 +38,6 @@ A full-stack rental platform for children's costumes in Atyrau, Kazakhstan, buil
    ```bash
    npm run dev
    ```
-   Откройте http://localhost:3000
 
 
 
@@ -50,7 +49,7 @@ src/
     catalog/           — catalog with filters
     costume/[slug]/    — costume card + booking
     reviews/           — feedback page + form
-    admin/             — admin panel (login, costumes, armor, reviews)
+    admin/             — admin panel (login, costumes, reviews)
     api/bookings/       — API booking
     api/reviews/        — API reviews (with photo upload)
   components/         — header, footer, cards, forms

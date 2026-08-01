@@ -3,7 +3,7 @@ export type Lang = "ru" | "kz";
 export const dict = {
   ru: {
     siteName: "ПрокатКостюм.kz",
-    tagline: "Прокат детских костюмов в Алматы",
+    tagline: "Прокат детских костюмов в Атырау",
     navCatalog: "Каталог",
     navNauryz: "Наурыз",
     navNewyear: "Новый год",
@@ -76,7 +76,7 @@ export const dict = {
   },
   kz: {
     siteName: "ПрокатКостюм.kz",
-    tagline: "Алматыдағы балалар костюмдерін жалға беру",
+    tagline: "Атыраудағы балалар костюмдерін жалға беру",
     navCatalog: "Каталог",
     navNauryz: "Наурыз",
     navNewyear: "Жаңа жыл",
