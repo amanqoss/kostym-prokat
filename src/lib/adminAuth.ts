@@ -1,14 +1,12 @@
 import { cookies } from "next/headers";
 
-// TODO: перед реальным запуском обязательно задайте свой пароль через
-// переменную окружения ADMIN_PASSWORD (в .env.local или в настройках хостинга).
+
 export const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "prokatkids2026";
 
 const SALT = "prokat-kids-admin-salt-v1";
 export const ADMIN_COOKIE_NAME = "admin_session";
 
-// Используем btoa вместо Node.js "crypto", т.к. btoa доступен и в Node,
-// и в Edge Runtime (где выполняется middleware) — это важно для совместимости.
+
 export function makeSessionToken(password: string) {
   return btoa(unescape(encodeURIComponent(password + SALT)));
 }

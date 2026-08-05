@@ -26,9 +26,7 @@
   --color-victory: var(--victory);
   --color-card: var(--card);
   --color-border: var(--border);
-  /* На проде (Vercel и т.п.) верните next/font/google Unbounded + Manrope —
-     см. комментарий в layout.tsx. Здесь используется системный стек, т.к.
-     эта песочница не имеет доступа к fonts.googleapis.com. */
+  
   --font-display: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --font-sans: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
