@@ -20,7 +20,7 @@ export default async function CostumePage({ params }: { params: Promise<{ slug: 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
       <div className="grid gap-10 md:grid-cols-2">
-        <div className="flex h-80 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 to-gold/10 text-7xl md:h-full">
+        <div className="flex h-80 items-center justify-center overflow-hidden rounded-2xl bg-linear-to-br from-primary/10 to-gold/10 text-7xl md:h-full">
           {costume.mainImageUrl ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={costume.mainImageUrl} alt={name} className="h-full w-full object-cover" />
